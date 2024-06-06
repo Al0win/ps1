@@ -1,0 +1,15 @@
+{
+  "name": "Selenium Python Codespace",
+  "dockerFile": "Dockerfile",
+
+  "extensions": [
+    "ms-python.python"
+  ],
+
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+
+  "postCreateCommand": "pip install selenium",
+}
