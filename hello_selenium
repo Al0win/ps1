@@ -1,0 +1,40 @@
+#Boiler-plate
+import os 
+import re
+import subprocess
+import time 
+
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC 
+
+service = Service(executable_path="chromedriver.exe")
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+driver = webdriver.Chrome(options= options, service = service)
+
+#Application
+driver.get("https://google.com")
+
+WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located((By.CLASS_NAME, "gLFyf"))
+)
+
+input_element = driver.find_element(By.CLASS_NAME, "gLFyf")
+input_element.clear()
+input_element.send_keys("Digital India Bhashini Division" + Keys.ENTER)
+
+
+# Wait until search results are present
+WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.ID, "search"))
+)
+
+# Find the link using a different locator, e.g., partial link text
+link = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Bhashini"))
+)
+link.click()
